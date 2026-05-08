@@ -1,4 +1,4 @@
-# Professional Portfolio - B MAA TEJA NAIK
+Portfolio - B MAA TEJA NAIK
 
 ## Overview
 This repository contains the source code for a comprehensive professional portfolio and an intelligent educational guidance platform. The project showcases a high-performance web interface integrated with a robust backend architecture, designed to present technical skills, academic achievements, and AI-driven projects effectively.

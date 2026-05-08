@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# Frontend
+node_modules/
+.DS_Store
+dist/
+.next/
+.parcel-cache/
+.cache/
+
+# System
+Thumbs.db
+Desktop.ini

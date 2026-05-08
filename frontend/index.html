@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | MAA TEJA NAIK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        space: "#040814", 
+                        energyOrange: "#ff6b00",
+                        energyTeal: "#0891b2", // Darker teal/cyan for better readability
+                        cardBg: "#f9fafb",
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        tech: ['Space Grotesk', 'sans-serif'],
+                        georgia: ['Georgia', 'serif'],
+                        sora: ['"Sora Carnel DEMO"', 'sans-serif'],
+                        agatho: ['"Agatho"', 'sans-serif'],
+                        constantia: ['Constantia', 'serif'],
+                        geometos: ['"Geometos"', 'sans-serif'],
+                        codec: ['"Codec Pro"', 'sans-serif'],
+                    },
+                    animation: {
+                        'flicker': 'flicker 4s infinite',
+                        'flow-orange': 'flow-orange 3s linear infinite',
+                        'flow-teal': 'flow-teal 3s linear infinite',
+                    },
+                    keyframes: {
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        'flicker': {
+                            '0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%': { opacity: 1 },
+                            '20%, 21.999%, 63%, 63.999%, 65%, 69.999%': { opacity: 0.3 },
+                        },
+                        'flow-orange': {
+                            '0%': { backgroundPosition: '200% center' },
+                            '100%': { backgroundPosition: '-200% center' }
+                        },
+                        'flow-teal': {
+                            '0%': { backgroundPosition: '-200% center' },
+                            '100%': { backgroundPosition: '200% center' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/agatho" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/geometos" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/codec-pro" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-space text-gray-300 font-sans overflow-x-hidden selection:bg-energyTeal selection:text-white">
+    <!-- Video Preloader -->
+    <div id="video-preloader" class="fixed inset-0 z-[100] bg-white flex items-center justify-center transition-opacity duration-500">
+        <video autoplay loop muted playsinline class="w-64 h-64 object-contain">
+            <source src="assets/loading.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Three.js Canvas Container -->
+    <div id="canvas-container" class="fixed inset-0 z-[-1] pointer-events-none"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent" id="navbar">
+        <div class="w-full px-10 md:px-20 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-sora font-bold text-white tracking-widest relative group uppercase">
+                <span class="text-white">PORTFOLIO</span>
+                <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-energyOrange to-energyTeal group-hover:w-full transition-all duration-300"></span>
+            </a>
+            <div class="hidden md:flex space-x-8 text-sm font-bold tracking-widest uppercase">
+                <a href="#education" class="text-gray-200 hover:text-white transition-all nav-link relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-energyTeal hover:after:w-full after:transition-all">Education</a>
+                <a href="#skills" class="text-gray-200 hover:text-white transition-all nav-link relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-energyOrange hover:after:w-full after:transition-all">Skills</a>
+                <a href="#projects" class="text-gray-200 hover:text-white transition-all nav-link relative after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-energyTeal hover:after:w-full after:transition-all">Projects</a>
+            </div>
+            <button class="md:hidden text-white hover:text-energyOrange">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Wrapper for Blur -->
+    <div id="main-content">
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative px-6 pt-20 overflow-hidden">
+        <!-- Video Background -->
+        <video autoplay loop muted playsinline class="absolute top-0 left-0 w-full h-full object-cover z-0 pointer-events-none">
+            <source src="assets/scene.mp4" type="video/mp4">
+        </video>
+        <!-- Dark Overlay for better text readability -->
+        <div class="absolute inset-0 bg-black/50 z-0 pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto text-center z-10 relative">
+            <h1 id="hero-name" class="text-5xl md:text-7xl mb-6 tracking-widest hero-text relative uppercase text-white font-georgia font-bold" data-text="MAA TEJA NAIK">
+                MAA TEJA NAIK
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 font-tech tracking-wider mb-2 uppercase">
+                SIH 2025 Winner <span class="text-energyTeal mx-2">•</span> Python <span class="text-energyOrange mx-2">•</span> AI Developer <span class="text-energyTeal mx-2">•</span> Problem Solver
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-8 hero-btns mt-12">
+                <a href="#internships" class="group relative px-10 py-4 font-bold text-energyOrange uppercase tracking-widest transition-all duration-300 ease-in-out hover:text-white bg-white/10 backdrop-blur-md border border-energyOrange overflow-hidden shadow-[0_0_15px_rgba(8,145,178,0.15)] hover:shadow-[0_0_20px_rgba(234,88,12,0.2)] transform hover:-translate-y-1">
+                    <span class="absolute inset-0 w-full h-full bg-energyOrange opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <span class="relative flex items-center gap-3 group-hover:text-white">View Work <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i></span>
+                </a>
+                <a href="#contact" class="group relative px-10 py-4 font-bold text-energyTeal uppercase tracking-widest transition-all duration-300 ease-in-out hover:text-white bg-white/10 backdrop-blur-md border border-energyTeal overflow-hidden shadow-[0_0_15px_rgba(8,145,178,0.15)] hover:shadow-[0_0_20px_rgba(234,88,12,0.2)] transform hover:-translate-y-1">
+                    <span class="absolute inset-0 w-full h-full bg-energyTeal opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                    <span class="relative flex items-center gap-3 group-hover:text-white">Contact Me <i data-lucide="mail" class="w-5 h-5"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-24 px-6 relative z-10 border-t border-gray-200 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-4 mb-16 section-header">
+                <h2 class="text-4xl font-geometos font-bold text-black">About Me</h2>
+                <div class="h-px bg-gradient-to-r from-energyTeal/50 to-transparent flex-grow ml-4"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="w-full md:w-1/3 flex justify-center">
+                    <div class="relative group">
+                        <div class="absolute -inset-2 bg-gradient-to-r from-energyOrange to-energyTeal rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500"></div>
+                        <img src="assets/mypic.jpeg" alt="MAA TEJA NAIK" class="relative rounded-2xl w-72 h-96 object-cover border border-gray-200 shadow-xl">
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3 space-y-6 text-lg text-gray-700 leading-relaxed font-medium">
+                    <p>
+                        Hi, I’m <span class="font-bold text-gray-900">B MAA TEJA NAIK</span>, a final-year B.Tech student in CSE (AI & ML) at Kalasalingam Academy of Research and Education. I’m a Smart India Hackathon 2025 winner with a strong interest in building impactful technology solutions.
+                    </p>
+                    <p>
+                        I am specialized in Python and Artificial Intelligence, developing projects that focus on efficiency and real-world applications. I have completed multiple certifications aligned with my domain and actively participated in hackathons to gain practical experience.
+                    </p>
+                    <p>
+                        I’m passionate about exploring the tech industry and continuously learning new skills. I aim to contribute to innovative solutions while growing as a developer in a dynamic environment.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-24 px-6 relative z-10 border-t border-gray-200 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-4 mb-16 section-header">
+                <h2 class="text-4xl font-geometos font-bold text-black">Education</h2>
+                <div class="h-px bg-gradient-to-r from-energyOrange/50 to-transparent flex-grow ml-4"></div>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-stretch md:items-center gap-6 md:gap-8 mt-10 w-full">
+                <!-- Higher Secondary -->
+                <div class="w-full md:w-1/2 group h-full">
+                    <div class="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 hover:shadow-md hover:border-energyTeal transition-all duration-500 transform hover:-translate-y-1 h-full flex flex-col relative overflow-hidden">
+                        <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-4">
+                            <h3 class="text-2xl font-codec font-bold text-gray-900 group-hover:text-energyTeal transition-colors">Higher Secondary</h3>
+                            <span class="text-energyTeal font-agatho font-semibold bg-blue-50 px-3 py-1 rounded-full text-sm mt-2 lg:mt-0 inline-block border border-energyTeal/30 w-fit">2021 - 2023</span>
+                        </div>
+                        <p class="text-lg text-gray-700 mb-2 font-semibold">Narayana Junior College, Tirupati, Andhra Pradesh</p>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-auto pt-2">
+                            <p class="text-gray-500">Maths, Physics, Chemistry Background</p>
+                            <p class="font-bold text-energyTeal bg-energyTeal/10 px-3 py-1 rounded-lg mt-2 sm:mt-0 w-fit border border-energyTeal/20">89.6%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="hidden md:flex flex-shrink-0 text-gray-900">
+                    <i data-lucide="arrow-right" class="w-10 h-10"></i>
+                </div>
+                <div class="md:hidden flex justify-center w-full text-gray-900 my-2">
+                    <i data-lucide="arrow-down" class="w-8 h-8"></i>
+                </div>
+
+                <!-- B.Tech -->
+                <div class="w-full md:w-1/2 group h-full">
+                    <div class="bg-white border border-gray-200 shadow-sm rounded-2xl p-6 hover:shadow-md hover:border-energyOrange transition-all duration-500 transform hover:-translate-y-1 h-full flex flex-col relative overflow-hidden">
+                        <div class="flex flex-col lg:flex-row lg:items-center justify-between mb-4">
+                            <h3 class="text-2xl font-codec font-bold text-gray-900 group-hover:text-energyOrange transition-colors">B.Tech in Computer Science</h3>
+                            <span class="text-energyOrange font-agatho font-semibold bg-energyOrange/10 px-3 py-1 rounded-full text-sm mt-2 lg:mt-0 inline-block border border-energyOrange/30 w-fit">2023 - 2027</span>
+                        </div>
+                        <p class="text-lg text-gray-700 mb-2 font-semibold">Kalasalingam Academy of Research and Education, Virudhunagar, TamilNadu</p>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-auto pt-2">
+                            <p class="text-gray-500">Computer Science and Engineering (AI and ML)</p>
+                            <p class="font-bold text-energyOrange bg-energyOrange/10 px-3 py-1 rounded-lg mt-2 sm:mt-0 w-fit border border-energyOrange/20">CGPA: 7.37</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Internships Section -->
+    <section id="internships" class="py-24 px-6 relative z-10 border-t border-gray-200 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center gap-4 mb-16 section-header">
+                <h2 class="text-5xl font-geometos font-bold text-black">Internships</h2>
+                <div class="h-px bg-gradient-to-r from-energyTeal/50 to-transparent flex-grow ml-4"></div>
+            </div>
+
+            <div class="relative border-l-2 border-energyTeal/30 ml-6 space-y-12">
+                <!-- Internship 1 -->
+                <div class="relative pl-8 timeline-item group">
+                    <div class="absolute -left-[9px] top-4 w-4 h-4 bg-white border-2 border-energyTeal rounded-full group-hover:bg-energyTeal transition-all duration-300"></div>
+                    <div class="bg-white border border-energyTeal/30 shadow-sm rounded-2xl p-6 hover:shadow-md hover:border-energyTeal transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h3 class="text-2xl font-codec font-bold text-gray-900 group-hover:text-energyTeal transition-colors">Microsoft Elevent Intern</h3>
+                            <span class="text-energyTeal font-agatho font-semibold bg-energyTeal/10 px-3 py-1 rounded-full text-sm mt-2 md:mt-0 inline-block border border-energyTeal/30">Jan 2026 - Feb 2026</span>
+                        </div>
+                        <p class="text-lg text-gray-700 mb-2 font-semibold">Microsoft Azure and AIML</p>
+                        <p class="text-gray-500 mb-4">Gained hands-on experience with Microsoft Azure cloud services and Microsoft development tools while working on AI-based solutions during the internship.</p>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-gray-100 pt-4 mt-2">
+                            <div class="text-sm">
+                                <span class="font-bold text-gray-900">Capstone Project:</span> <a href="#projects" class="text-gray-500 hover:text-energyTeal transition-colors duration-300 underline-offset-4 hover:underline cursor-pointer">AI Travel Planner for Students</a>
+                            </div>
+                            <a href="assets/Internship/ms intern cert.pdf" target="_blank" class="text-sm font-semibold text-energyTeal hover:underline flex items-center gap-1 w-fit">
+                                View <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Internship 2 -->
+                <div class="relative pl-8 timeline-item group">
+                    <div class="absolute -left-[9px] top-4 w-4 h-4 bg-white border-2 border-energyOrange rounded-full group-hover:bg-energyOrange transition-all duration-300"></div>
+                    <div class="bg-white border border-energyOrange/30 shadow-sm rounded-2xl p-6 hover:shadow-md hover:border-energyOrange transition-all duration-500 transform hover:-translate-y-1 relative overflow-hidden">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                            <h3 class="text-2xl font-codec font-bold text-gray-900 group-hover:text-energyOrange transition-colors">IBM SkillsBuild Intern</h3>
+                            <span class="text-energyOrange font-agatho font-semibold bg-energyOrange/10 px-3 py-1 rounded-full text-sm mt-2 md:mt-0 inline-block border border-energyOrange/30">Jan 2026 - Feb 2026</span>
+                        </div>
+                        <p class="text-lg text-gray-700 mb-2 font-semibold">Artificial Intelligence and Machine Learning</p>
+                        <p class="text-gray-500 mb-4">Gained practical experience with IBM SkillsBuild AI tools and technologies, explored various AI concepts, and built a domain-based project using real-world applications.</p>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-gray-100 pt-4 mt-2">
+                            <div class="text-sm">
+                                <span class="font-bold text-gray-900">Capstone Project:</span> <a href="#projects" class="text-gray-500 hover:text-energyOrange transition-colors duration-300 underline-offset-4 hover:underline cursor-pointer">Super Resolution GAN</a>
+                            </div>
+                            <a href="assets/Internship/Ibm intern cert.pdf" target="_blank" class="text-sm font-semibold text-energyOrange hover:underline flex items-center gap-1 w-fit">
+                                View <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 px-6 relative z-10 border-y border-gray-200 bg-white overflow-hidden">
+        <!-- Dark Background Shape -->
+        <div class="absolute top-0 right-0 w-full md:w-[60%] h-full bg-[#0B1120] rounded-l-[150px] md:rounded-l-[400px] z-0"></div>
+        
+        <!-- Abstract Particles/Dots (CSS background) -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 40px 40px; mask-image: linear-gradient(to right, transparent, black);"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center w-full h-full gap-12">
+            <!-- Left Content -->
+            <div class="w-full md:w-1/3 flex flex-col items-start z-20 md:pr-10 relative -mt-4 md:-mt-12">
+                <h2 class="text-5xl md:text-7xl font-geometos font-bold text-black mb-4 tracking-tight leading-tight">Tech Skills</h2>
+                <p class="text-gray-500 text-lg max-w-sm mb-8 leading-relaxed">Technologies and tools I use to build, learn and innovate.</p>
+                <div class="w-24 h-1 bg-gradient-to-r from-energyTeal to-energyOrange rounded-full"></div>
+            </div>
+
+            
+            
+            <!-- Right Floating Tiles Radial Layout -->
+            <div class="w-full md:w-2/3 relative h-[450px] md:h-[500px] mt-12 md:mt-0 flex items-center justify-center perspective-1000 md:ml-40">
+                
+                <!-- Clusters Container (NO Scaling, explicitly sized elements) -->
+                <div class="relative w-full h-full transform-gpu rotate-y-[-5deg] rotate-x-[5deg]">
+                    
+                    
+
+                    <!-- Top: Concepts -->
+                    <div class="absolute top-[5%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_6.2s_ease-in-out_infinite_0.4s]">
+                        <div class="flex flex-col items-center gap-3">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(139,92,246,0.3)]">Concepts & Tech</div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <i data-lucide="box" class="w-8 h-8 text-purple-600"></i>
+                                    <span class="text-[10px] font-bold text-gray-800">OOP</span>
+                                </div>
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <i data-lucide="git-branch" class="w-8 h-8 text-blue-600"></i>
+                                    <span class="text-[10px] font-bold text-gray-800">DSA</span>
+                                </div>
+                                <div class="w-20 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300 p-2 text-center">
+                                    <i data-lucide="plug" class="w-8 h-8 text-green-600"></i>
+                                    <span class="text-[9px] font-bold text-gray-800 leading-tight">API</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Right: Web Dev -->
+                    <div class="absolute top-[25%] left-[85%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_5s_ease-in-out_infinite_0.5s]">
+                        <div class="flex flex-col items-center gap-3">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.3)]">Web Dev</div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-20 h-24 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-2 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="w-12 h-12">
+                                    <span class="text-[11px] font-bold text-gray-800">React.js</span>
+                                </div>
+                                <div class="w-20 h-24 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-2 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" class="w-12 h-12">
+                                    <span class="text-[11px] font-bold text-gray-800">FastAPI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Right: AI / ML -->
+                    <div class="absolute top-[85%] left-[85%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_7s_ease-in-out_infinite_1s]">
+                        <div class="flex flex-col items-center gap-3">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(236,72,153,0.3)]">AI / ML</div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" class="w-10 h-10">
+                                    <span class="text-[10px] font-bold text-gray-800">NumPy</span>
+                                </div>
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" class="w-10 h-10">
+                                    <span class="text-[10px] font-bold text-gray-800">Pandas</span>
+                                </div>
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <i data-lucide="network" class="w-10 h-10 text-blue-900"></i>
+                                    <span class="text-[10px] font-bold text-gray-800">CNN</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom: Databases & Cloud -->
+                    <div class="absolute top-[85%] left-[25%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_6.5s_ease-in-out_infinite_0.2s]">
+                        <div class="flex flex-col items-center gap-3">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(59,130,246,0.3)]">Databases & Cloud</div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="w-10 h-10">
+                                    <span class="text-[10px] font-bold text-gray-800">MySQL</span>
+                                </div>
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" class="w-10 h-10">
+                                    <span class="text-[10px] font-bold text-gray-800">MongoDB</span>
+                                </div>
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" class="w-10 h-10">
+                                    <span class="text-[10px] font-bold text-gray-800">Firebase</span>
+                                </div>
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" class="w-10 h-10">
+                                    <span class="text-[10px] font-bold text-gray-800">Azure</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Center: Languages -->
+                    <div class="absolute top-[40%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_6s_ease-in-out_infinite_1.5s] z-30">
+                        <div class="flex flex-col items-center gap-4">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(0,240,255,0.3)]"><i data-lucide="code" class="w-3 h-3 text-energyTeal"></i> Languages</div>
+                            <div class="flex items-end gap-3">
+                                <div class="w-20 h-24 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-2 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="w-12 h-12">
+                                    <span class="text-[11px] font-bold text-gray-800">JavaScript</span>
+                                </div>
+                                <div class="w-32 h-36 bg-white rounded-2xl shadow-[0_15px_35px_rgba(0,0,0,0.2),0_0_30px_rgba(0,240,255,0.6)] flex flex-col items-center justify-center gap-3 transform hover:-translate-y-3 transition-transform duration-300 z-10 border border-energyTeal/30 relative">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="w-20 h-20">
+                                    <span class="text-sm font-bold text-gray-800">Python</span>
+                                </div>
+                                <div class="w-20 h-24 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-2 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" class="w-12 h-12">
+                                    <span class="text-[11px] font-bold text-gray-800">TypeScript</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+
+                    <!-- Left: Tools & Platforms -->
+                    <div class="absolute top-[25%] left-[15%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_5.5s_ease-in-out_infinite_0.8s]">
+                        <div class="flex flex-col items-center gap-3">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(249,115,22,0.3)]">Tools & Platforms</div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="w-10 h-10">
+                                    <span class="text-[10px] font-bold text-gray-800">GitHub</span>
+                                </div>
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" class="w-10 h-10">
+                                    <span class="text-[10px] font-bold text-gray-800">VS Code</span>
+                                </div>
+                                <div class="w-16 h-20 bg-white rounded-xl shadow-lg flex flex-col items-center justify-center gap-1 transform hover:-translate-y-2 transition-transform duration-300">
+                                    <div class="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xs">CO</div>
+                                    <span class="text-[9px] font-bold text-gray-800 text-center">Colab</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 px-6 relative z-10 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-4 mb-16 section-header">
+                <h2 class="text-5xl font-geometos font-bold text-black">Projects</h2>
+                <div class="h-px bg-gradient-to-r from-energyOrange/50 to-transparent flex-grow ml-4"></div>
+            </div>
+
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Dynamic Projects -->
+                <div class="col-span-full flex justify-center py-10">
+                    <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-energyOrange"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-32 px-6 relative z-10 border-t border-gray-200 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-4 mb-16 section-header">
+                <h2 class="text-5xl font-geometos font-bold text-black">Certifications</h2>
+                <div class="h-px bg-gradient-to-r from-energyTeal/50 to-transparent flex-grow ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Cert 1 -->
+                <div class="group rounded-2xl bg-white border border-energyTeal/30 hover:border-energyTeal transition-all duration-500 cert-card shadow-sm hover:shadow-md overflow-hidden">
+                    <div class="h-full rounded-xl p-10 relative flex flex-col">
+                        <h3 class="text-xl font-codec font-bold text-gray-900 mb-3">Machine Learning with Python</h3>
+                        <p class="text-gray-500 mb-4 flex-grow text-sm">Issued by freeCodeCamp.</p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-xs font-agatho font-semibold text-energyTeal bg-energyTeal/10 px-2 py-1 rounded border border-energyTeal/30 w-fit">Aug 4, 2025</span>
+                            <a href="assets/certificates/Free code camp.pdf" target="_blank" class="text-sm font-semibold text-energyTeal hover:underline flex items-center gap-1">
+                                View <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="group rounded-2xl bg-white border border-gray-200 hover:border-energyOrange transition-all duration-500 cert-card shadow-sm hover:shadow-md overflow-hidden">
+                    <div class="h-full rounded-xl p-8 relative flex flex-col">
+                        <h3 class="text-xl font-codec font-bold text-gray-900 mb-3">Oracle Generative AI Professional</h3>
+                        <p class="text-gray-500 mb-4 flex-grow text-sm">Oracle Cloud Infrastructure 2025 Certified Generative AI Professional.</p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-xs font-agatho font-semibold text-energyOrange bg-energyOrange/10 px-2 py-1 rounded border border-energyOrange/30 w-fit">Sep 29, 2025</span>
+                            <a href="assets/certificates/Oracle Gen AI Professional.pdf" target="_blank" class="text-sm font-semibold text-energyOrange hover:underline flex items-center gap-1">
+                                View <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="group rounded-2xl bg-white border border-energyTeal/30 hover:border-energyTeal transition-all duration-500 cert-card shadow-sm hover:shadow-md overflow-hidden">
+                    <div class="h-full rounded-xl p-10 relative flex flex-col">
+                        <h3 class="text-xl font-codec font-bold text-gray-900 mb-3">Deep Learning</h3>
+                        <p class="text-gray-500 mb-4 flex-grow text-sm">Simplilearn SkillUp.</p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-xs font-agatho font-semibold text-energyTeal bg-energyTeal/10 px-2 py-1 rounded border border-energyTeal/30 w-fit">Aug 19, 2025</span>
+                            <a href="assets/certificates/Simpli Learn Deep Learning.pdf" target="_blank" class="text-sm font-semibold text-energyTeal hover:underline flex items-center gap-1">
+                                View <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-24 px-6 relative z-10 border-t border-gray-200 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-4 mb-16 section-header">
+                <h2 class="text-5xl font-geometos font-bold text-black">Achievements</h2>
+                <div class="h-px bg-gradient-to-r from-energyOrange/50 to-transparent flex-grow ml-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="group rounded-2xl bg-white border border-energyOrange/30 hover:border-energyOrange transition-all duration-500 cert-card shadow-sm hover:shadow-md overflow-hidden">
+                    <div class="h-full rounded-xl p-10 relative flex flex-col">
+                        <h3 class="text-3xl font-codec font-bold text-gray-900 mb-3">Smart India Hackathon Winner</h3>
+                        <p class="text-gray-500 mb-4 flex-grow text-base">Winner in the Smart IndiaHackathon 2025. Built Edupath navigator a career guidance platform.</p>
+                        <div class="flex items-center justify-between mt-auto">
+                            <span class="text-xs font-agatho font-semibold text-energyOrange bg-energyOrange/10 px-2 py-1 rounded border border-energyOrange/30 w-fit">Dec 2025</span>
+                            <a href="assets/achievements/sih cert.pdf" target="_blank" class="text-sm font-semibold text-energyOrange hover:underline flex items-center gap-1">
+                                View <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 relative z-10 min-h-[80vh] flex items-center bg-white border-t border-gray-200">
+        <div class="max-w-4xl mx-auto w-full">
+            <div class="text-center mb-16 section-header">
+                <h2 class="text-5xl font-geometos font-bold text-black mb-4">Initiate Link</h2>
+                <p class="text-gray-500 max-w-3xl mx-auto">Open for collaborations, Opportunities, or just a chat about technology and AI.</p>
+            </div>
+
+            <div class="bg-white border border-gray-200 hover:border-gray-900 rounded-3xl p-10 md:p-16 shadow-sm hover:shadow-[0_0_30px_rgba(0,0,0,0.2)] flex flex-col items-center justify-center text-center transition-all duration-500 transform hover:-translate-y-2">
+                <h3 class="text-3xl font-bold text-gray-900 mb-8">Check my work or connect with me directly</h3>
+                <div class="flex gap-8 justify-center items-center">
+                    <a href="https://github.com/Maateja" target="_blank" class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-gray-900 hover:shadow-sm transition-all duration-300 hover:scale-110 overflow-hidden">
+                        <svg viewBox="0 0 24 24" class="w-8 h-8" fill="#181717" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tejanaikb/" target="_blank" class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-[#0A66C2] hover:shadow-sm transition-all duration-300 hover:scale-110 overflow-hidden">
+                        <svg viewBox="0 0 24 24" class="w-8 h-8" fill="#0A66C2" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    </a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=naikmteja@gmail.com" target="_blank" class="w-16 h-16 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-[#EA4335] hover:shadow-sm transition-all duration-300 hover:scale-110 overflow-hidden">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Gmail" class="w-8 h-8 object-contain">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 bg-white py-4 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 flex justify-center items-center text-center">
+            <p class="text-gray-500 text-sm font-medium font-agatho">©2026 <span class="font-georgia tracking-normal text-gray-900">MAA TEJA NAIK</span>. ALL SYSTEMS OPERATIONAL.</p>
+        </div>
+    </footer>
+
+    </div>
+
+    <!-- Project Detail Modal -->
+    <div id="project-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-6 bg-black/60 backdrop-blur-md opacity-0">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-3xl shadow-2xl overflow-hidden flex flex-col transform scale-95" id="modal-content">
+            <!-- Modal Header -->
+            <div class="relative h-80 md:h-[400px] bg-gradient-to-r from-energyTeal to-energyOrange flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0 bg-black/30"></div>
+                <div class="relative z-10 w-full flex flex-col items-center justify-center px-6">
+                    <h2 id="modal-title" class="text-lg md:text-2xl lg:text-3xl font-geometos font-bold text-white leading-relaxed text-center max-w-4xl">Project Title</h2>
+                </div>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="flex-grow overflow-y-auto p-8 md:p-12 custom-scrollbar">
+                <div id="modal-body-content" class="space-y-8 text-gray-700 leading-relaxed">
+                    <!-- Content will be injected here -->
+                </div>
+            </div>
+            
+            <!-- Modal Footer -->
+            <div class="p-6 border-t border-gray-100 bg-gray-50 flex justify-between items-center">
+                <div class="flex gap-4">
+                    <a id="modal-github" href="#" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-xl hover:bg-black transition-all font-semibold">
+                        <i data-lucide="github" class="w-5 h-5"></i> GitHub
+                    </a>
+                    <a id="modal-demo" href="#" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-energyTeal text-white rounded-xl hover:bg-energyTeal/90 transition-all font-semibold">
+                        <i data-lucide="external-link" class="w-5 h-5"></i> Live Demo
+                    </a>
+                </div>
+                <button id="modal-close-btn" class="px-6 py-2 border border-gray-300 rounded-xl hover:bg-gray-100 transition-all font-semibold text-gray-600">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/script.js?v=20"></script>
+</body>
+</html>

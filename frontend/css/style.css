@@ -1,0 +1,263 @@
+@font-face {
+    font-family: 'Versa Versa';
+    src: url('../assets/fonts/versa_versa/Versa-Versa.woff') format('woff'),
+         url('../assets/fonts/versa_versa/Versa-Versa.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #020308;
+}
+::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ff6b00;
+}
+
+/* Base styles and fixes */
+html {
+    scroll-padding-top: 80px;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Cyberpunk Phoenix Glitch Styles */
+.glitch-reveal {
+    position: relative;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.glitch-reveal.active {
+    opacity: 1;
+    visibility: visible;
+    animation: glitch-anim 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Vertical Slicing & Energy Jitter */
+@keyframes glitch-anim {
+    0% { transform: translate(0); clip-path: inset(40% 0 61% 0); }
+    10% { transform: translate(-5px, 2px); clip-path: inset(10% 0 80% 0); }
+    20% { transform: translate(5px, -2px); clip-path: inset(80% 0 10% 0); }
+    30% { transform: translate(-5px, 1px); clip-path: inset(30% 0 30% 0); }
+    40% { transform: translate(5px, -1px); clip-path: inset(60% 0 20% 0); }
+    50% { transform: translate(-2px, 2px); clip-path: inset(10% 0 10% 0); }
+    100% { transform: translate(0); clip-path: inset(0 0 0 0); }
+}
+
+.rgb-split {
+    /* Phoenix/Cyberpunk Colors: Neon Orange and Electric Cyan */
+    text-shadow: 
+        3px 0 rgba(255, 107, 0, 0.8), 
+        -3px 0 rgba(0, 240, 255, 0.8);
+    filter: drop-shadow(0 0 5px rgba(255, 107, 0, 0.5));
+}
+
+/* Scanline Effect */
+.glitch-reveal::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+/* Chevron Pattern Background */
+#hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.02) 25%, transparent 25%);
+    background-size: 60px 60px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Typewriter cursor */
+#typewriter {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+/* Project card interactions */
+.project-card {
+    perspective: 1000px;
+}
+
+.project-card-inner {
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+/* Futuristic Background Animation for Project Cards */
+.futuristic-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    background: #ffffff;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+/* Show animation only on hover */
+.group:hover .futuristic-card-bg {
+    opacity: 1;
+}
+
+.futuristic-streak {
+    position: absolute;
+    bottom: -150px;
+    width: 4px;
+    background: currentColor;
+    border-radius: 20px;
+    opacity: 0;
+    animation: futuristic-move linear infinite;
+    will-change: transform, opacity;
+}
+
+/* Head of the streak has more glow */
+.futuristic-streak::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    border-radius: inherit;
+    filter: blur(4px);
+    opacity: 0.8;
+}
+
+@keyframes futuristic-move {
+    0% {
+        transform: translateY(0) translateX(0) rotate(-45deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    90% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(-600px) translateX(600px) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+/* Enhanced Color variations matching reference */
+.streak-cyan { color: #4deeea; box-shadow: 0 0 15px #4deeea; }
+.streak-blue { color: #74ee15; box-shadow: 0 0 15px #74ee15; }
+.streak-green { color: #ffe700; box-shadow: 0 0 15px #ffe700; }
+.streak-red { color: #f000ff; box-shadow: 0 0 15px #f000ff; }
+.streak-bright-red { color: #ff004c; box-shadow: 0 0 15px #ff004c; }
+
+#project-modal {
+    transition: opacity 0.3s ease-in-out;
+}
+
+#project-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+#project-modal.active #modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+#modal-content {
+    transform-origin: center center;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out !important;
+}
+
+.main-content-blur {
+    filter: blur(8px);
+    transition: filter 0.5s ease;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* Custom Scrollbar for Modal Body */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Modal Content Typography */
+.modal-section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.modal-list {
+    margin-top: 0.75rem;
+    list-style: none;
+    padding: 0;
+}
+.modal-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+.modal-list-dot {
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background-color: #0891b2;
+    margin-top: 0.625rem;
+    flex-shrink: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.5s ease forwards;
+}
+

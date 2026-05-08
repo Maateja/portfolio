@@ -276,15 +276,34 @@
             
             
             <!-- Right Floating Tiles Radial Layout -->
-            <div class="w-full md:w-2/3 relative h-[450px] md:h-[500px] mt-12 md:mt-0 flex items-center justify-center perspective-1000 md:ml-40">
-                
-                <!-- Clusters Container (NO Scaling, explicitly sized elements) -->
+            <div class="w-full md:w-2/3 relative h-[650px] md:h-[700px] mt-12 md:mt-0 flex items-center justify-center perspective-1000 md:ml-40">
                 <div class="relative w-full h-full transform-gpu rotate-y-[-5deg] rotate-x-[5deg]">
                     
                     
 
-                    <!-- Top: Concepts -->
-                    <div class="absolute top-[5%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_6.2s_ease-in-out_infinite_0.4s]">
+                    <!-- Top Left: Tools & Platforms -->
+                    <div class="absolute top-[10%] left-[10%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_5.5s_ease-in-out_infinite_0.8s] z-20">
+                        <div class="flex flex-col items-center gap-3">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(249,115,22,0.3)]">Tools & Platforms</div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-24 h-32 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 transform hover:-translate-y-2 transition-transform duration-300 p-4">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="w-12 h-12">
+                                    <span class="text-lg font-bold text-gray-800">GitHub</span>
+                                </div>
+                                <div class="w-24 h-32 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 transform hover:-translate-y-2 transition-transform duration-300 p-4">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" class="w-12 h-12">
+                                    <span class="text-lg font-bold text-gray-800">VS Code</span>
+                                </div>
+                                <div class="w-24 h-32 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 transform hover:-translate-y-2 transition-transform duration-300 p-4">
+                                    <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">CO</div>
+                                    <span class="text-lg font-bold text-gray-800 text-center leading-tight">Colab</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Right: Concepts & Tech -->
+                    <div class="absolute top-[10%] left-[85%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_6.2s_ease-in-out_infinite_0.4s]">
                         <div class="flex flex-col items-center gap-3">
                             <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(139,92,246,0.3)]">Concepts & Tech</div>
                             <div class="flex items-center gap-3">
@@ -304,8 +323,8 @@
                         </div>
                     </div>
 
-                    <!-- Top Right: Web Dev -->
-                    <div class="absolute top-[25%] left-[85%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_5s_ease-in-out_infinite_0.5s]">
+                    <!-- Middle Right: Web Dev -->
+                    <div class="absolute top-[40%] left-[90%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_5s_ease-in-out_infinite_0.5s]">
                         <div class="flex flex-col items-center gap-3">
                             <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(168,85,247,0.3)]">Web Dev</div>
                             <div class="flex items-center gap-3">
@@ -362,9 +381,33 @@
                                 <div class="w-24 h-32 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 transform hover:-translate-y-2 transition-transform duration-300 p-4">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" class="w-12 h-12">
                                     <span class="text-lg font-bold text-gray-800">Azure</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Right: AI / ML -->
+                    <div class="absolute top-[80%] left-[85%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_7s_ease-in-out_infinite_1s]">
+                        <div class="flex flex-col items-center gap-3">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(236,72,153,0.3)]">AI / ML</div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-24 h-32 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 transform hover:-translate-y-2 transition-transform duration-300 p-4">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" class="w-12 h-12">
+                                    <span class="text-lg font-bold text-gray-800">NumPy</span>
                                 </div>
+                                <div class="w-24 h-32 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 transform hover:-translate-y-2 transition-transform duration-300 p-4">
+                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" class="w-12 h-12">
+                                    <span class="text-lg font-bold text-gray-800">Pandas</span>
+                                </div>
+                                <div class="w-24 h-32 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 transform hover:-translate-y-2 transition-transform duration-300 p-4">
+                                    <i data-lucide="network" class="w-12 h-12 text-blue-900"></i>
+                                    <span class="text-lg font-bold text-gray-800">CNN</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Languages (Center) -->
-                    <div class="absolute top-[40%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_6s_ease-in-out_infinite_1.5s] z-30">
+                    <div class="absolute top-[45%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_6s_ease-in-out_infinite_1.5s] z-30">
                         <div class="flex flex-col items-center gap-4">
                             <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(0,240,255,0.3)]"><i data-lucide="code" class="w-3 h-3 text-energyTeal"></i> Languages</div>
                             <div class="flex items-end gap-6">
@@ -379,27 +422,6 @@
                                 <div class="w-28 h-36 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 transform hover:-translate-y-2 transition-transform duration-300 p-4">
                                     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" class="w-16 h-16">
                                     <span class="text-lg font-bold text-gray-800">TypeScript</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Tools & Platforms -->
-                    <div class="absolute top-[75%] left-[25%] transform -translate-x-1/2 -translate-y-1/2 tech-cluster animate-[float_6s_ease-in-out_infinite_2.5s] z-20">
-                        <div class="flex flex-col items-center gap-3">
-                            <div class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-3 py-1 rounded-full text-[11px] font-semibold flex items-center gap-2 shadow-[0_0_15px_rgba(249,115,22,0.3)]">Tools & Platforms</div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-24 h-32 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 transform hover:-translate-y-2 transition-transform duration-300 p-4">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="w-12 h-12">
-                                    <span class="text-lg font-bold text-gray-800">GitHub</span>
-                                </div>
-                                <div class="w-24 h-32 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 transform hover:-translate-y-2 transition-transform duration-300 p-4">
-                                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" class="w-12 h-12">
-                                    <span class="text-lg font-bold text-gray-800">VS Code</span>
-                                </div>
-                                <div class="w-24 h-32 bg-white rounded-2xl shadow-xl flex flex-col items-center justify-center gap-3 transform hover:-translate-y-2 transition-transform duration-300 p-4">
-                                    <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">CO</div>
-                                    <span class="text-lg font-bold text-gray-800 text-center leading-tight">Colab</span>
                                 </div>
                             </div>
                         </div>
